@@ -11,9 +11,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-    // Example of a call to a native method
-    TextView tv = (TextView) findViewById(R.id.sample_text);
-    tv.setText(stringFromJNI());
+        // Example of a call to a native method
+        TextView tv = (TextView) findViewById(R.id.sample_text);
+        MyJnilibs myJnilibs = new MyJnilibs();
+        int a=myJnilibs.add(1,2);
+        tv.setText(""+a);
+//        tv.setText(""+myJnilibs.getPw());
     }
 
     /**
@@ -22,8 +25,13 @@ public class MainActivity extends AppCompatActivity {
      */
     public native String stringFromJNI();
 
+
     // Used to load the 'native-lib' library on application startup.
     static {
         System.loadLibrary("native-lib2");
+    }
+
+    static {
+        System.loadLibrary("myjni-lib");
     }
 }
